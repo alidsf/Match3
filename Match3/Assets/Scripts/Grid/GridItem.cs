@@ -61,8 +61,14 @@ public class GridItem : MonoBehaviour
         SetFallPosition();
     }
 
-    public void SetEnable(bool value) =>
+    public void SetEnable(bool value)
+    {
         gameObject.SetActive(value);
+
+        if (!value)
+            BlastParticleManager.Instance.Blast(_gridItemNumber,
+                objects[_gridItemNumber].transform.position, transform.localScale);
+    }
 
     private void SetFallPosition()
     {

@@ -207,6 +207,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &802879900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 802879901}
+  - component: {fileID: 802879902}
+  m_Layer: 0
+  m_Name: BlastParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &802879901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802879900}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 898610598}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802879902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802879900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d453ebcd15844299a4bc128ec247654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blastParticlePrefab: {fileID: -4881808425928557739, guid: 28cac273bc5274a6cbb03612224ff2d4, type: 3}
 --- !u!1 &898610596
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +295,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1353647392}
+  - {fileID: 802879901}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -283,11 +329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c072293584a3f4a3a8e2719bb901771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridItemPrefab: {fileID: 52349115483126791, guid: 1ed0272bfb3fc492b8e90fa63a9bd7d6, type: 3}
-  gridCreator: {fileID: 1353647393}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  gridItemPrefab: {fileID: 52349115483126791, guid: 1ed0272bfb3fc492b8e90fa63a9bd7d6, type: 3}
+  gridCreator: {fileID: 1353647393}
 --- !u!4 &1353647392
 Transform:
   m_ObjectHideFlags: 0
@@ -375,7 +421,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 5ff6907887d094cdc8942120703ed256, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

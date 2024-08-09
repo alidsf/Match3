@@ -1,10 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Match3Checker : MonoBehaviour
 {
-    public static List<GridItem> GetMatch3(GridItem[,] gridItems)
+    public static void SetWithoutMatch(ref GridItem[,] gridItems)
+    {
+        List<GridItem> matchList = GetMatch3(gridItems);
+
+        while (matchList.Count > 0)
+        {
+            for (int i = 0; i < matchList.Count; i++)
+                matchList[i].SetRandomGridItem();
+
+            matchList = GetMatch3(gridItems);
+        }
+    }
+
+    public static void CheckMatch(GridItem[,] gridItems, Action<List<GridItem>> matchAction, Action notMatchAction)
+    {
+        List<GridItem> matchList = GetMatch3(gridItems);
+
+        if (matchList.Count > 0)
+            matchAction(matchList);
+        else
+            notMatchAction();
+    }
+
+    private static List<GridItem> GetMatch3(GridItem[,] gridItems)
     {
         List<GridItem> matchList = new List<GridItem>();
 

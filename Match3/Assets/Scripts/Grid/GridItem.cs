@@ -8,7 +8,7 @@ public class GridItem : MonoBehaviour
 
     private int _gridItemNumber;
     public int gridItemNumber { get { return _gridItemNumber; } }
-    private float _speed = 10f;
+    private float _speed = 8f;
 
     private Vector2Int _targetPosition;
     public Vector2Int targetPosition { get { return _targetPosition; } }
@@ -16,16 +16,18 @@ public class GridItem : MonoBehaviour
     private bool _isMoving;
     public bool isMoving { get { return _isMoving; } }
 
+    public bool isEnable { get { return gameObject.activeSelf; } }
+
+    public void SetTarget(Vector2Int targetPosition) =>
+            _targetPosition = targetPosition;
+
     public void SetRandomGridItem()
     {
         int randomNumber = Random.Range(0, objects.Length);
         SetGridItem(randomNumber);
     }
 
-    public void SetTarget(Vector2Int targetPosition) =>
-        _targetPosition = targetPosition;
-
-    public void SetGridItem(int gridItemNumber)
+    private void SetGridItem(int gridItemNumber)
     {
         int maxNumber = objects.Length - 1;
         _gridItemNumber = (gridItemNumber > maxNumber) ? maxNumber : gridItemNumber;
@@ -40,7 +42,7 @@ public class GridItem : MonoBehaviour
     {
         Vector3 target = (Vector2)_targetPosition * transform.localScale;
 
-        if (Vector2.Distance(transform.localPosition, target) > 0.05f)
+        if (Vector2.Distance(transform.localPosition, target) > 0.1f)
         {
             transform.localPosition = Vector2.MoveTowards(transform.localPosition, target, _speed * Time.deltaTime);
             _isMoving = true;
@@ -50,5 +52,22 @@ public class GridItem : MonoBehaviour
             transform.localPosition = target;
             _isMoving = false;
         }
+    }
+
+    public void Reset()
+    {
+        SetEnable(true);
+        SetRandomGridItem();
+        SetFallPosition();
+    }
+
+    public void SetEnable(bool value) =>
+        gameObject.SetActive(value);
+
+    private void SetFallPosition()
+    {
+        int height = targetPosition.y;
+        Vector3 fallPosition = Vector2.up * height;
+        transform.localPosition += fallPosition;
     }
 }

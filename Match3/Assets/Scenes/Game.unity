@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c072293584a3f4a3a8e2719bb901771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPrefab: {fileID: 4127330062829789608, guid: e7809d39f9f6a44c7ad4d4ae74993e56, type: 3}
   gridItemPrefab: {fileID: 52349115483126791, guid: 1ed0272bfb3fc492b8e90fa63a9bd7d6, type: 3}
   gridCreator: {fileID: 1353647393}
   layerMask:
@@ -297,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353647390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.2, z: 0}
+  m_LocalPosition: {x: -0.85, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -318,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 8
   row: 8
-  gridSize: 0.75
+  boardSize: 6
 --- !u!1 &1614515582
 GameObject:
   m_ObjectHideFlags: 0

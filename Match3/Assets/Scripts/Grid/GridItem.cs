@@ -9,7 +9,6 @@ public class GridItem : PooledObject<GridItem>
 
     private int _gridItemNumber;
     public int gridItemNumber { get { return _gridItemNumber; } }
-    private float _speed = 8f;
 
     private Vector2Int _targetPosition;
     public Vector2Int targetPosition { get { return _targetPosition; } }
@@ -18,6 +17,8 @@ public class GridItem : PooledObject<GridItem>
     public bool isMoving { get { return _isMoving; } }
 
     public bool isEnable { get { return itemObject.activeSelf; } }
+
+    private float _speed = 8f;
 
     public void SetTarget(Vector2Int targetPosition) =>
             _targetPosition = targetPosition;

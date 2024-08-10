@@ -76,7 +76,9 @@ public class Match3Checker : MonoBehaviour
                             currentList.AddRange(matchGrids);
 
                         matchGrids.Clear();
-                        matchGrids.Add(currentGrid);
+
+                        if (!isLastGrid)
+                            matchGrids.Add(currentGrid);
                     }
                 }
             }

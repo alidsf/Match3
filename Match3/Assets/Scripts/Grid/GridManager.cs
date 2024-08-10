@@ -138,8 +138,6 @@ public class GridManager : MonoBehaviour
 
         _gridItems[firstPosition.x, firstPosition.y] = second;
         _gridItems[secondPosition.x, secondPosition.y] = first;
-
-        _mouseUp = false;
     }
 
     private void FixedUpdate()
@@ -154,6 +152,8 @@ public class GridManager : MonoBehaviour
     private void NewMove()
     {
         ChangeGridItemPosition(firstGridItem, secondGridItem);
+
+        _mouseUp = false;
         _canCheckMatch3 = true;
     }
 

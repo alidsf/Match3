@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private SliderController sliderController;
     [SerializeField] private Timer timer;
 
-    LevelScriptableObject _currentLevel;
+    private LevelScriptableObject _currentLevel;
     private bool _isPlaying;
 
     private int _maxLevelNumber = 3;

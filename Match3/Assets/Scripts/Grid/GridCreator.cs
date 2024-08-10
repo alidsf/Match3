@@ -40,12 +40,4 @@ public class GridCreator : MonoBehaviour
         
         return newItem;
     }
-
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.green;
-    //     Vector3 size = new Vector3(boardSize / row, boardSize / column) * Mathf.Min(column, row);
-    //     Vector3 center = transform.position + size / 2;
-    //     Gizmos.DrawWireCube(center, size);
-    // }
 }

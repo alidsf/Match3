@@ -67,9 +67,12 @@ public class GridItem : PooledObject<GridItem>
         itemObject.SetActive(value);
 
         if (!value)
-            BlastParticleManager.Instance.Blast(_gridItemNumber,
-                objects[_gridItemNumber].transform.position, transform.localScale);
+            Blast();
     }
+
+    private void Blast() =>
+        BlastParticleManager.Instance.Blast(_gridItemNumber,
+                objects[_gridItemNumber].transform.position, transform.localScale);
 
     private void SetFallPosition()
     {
@@ -80,6 +83,7 @@ public class GridItem : PooledObject<GridItem>
 
     public void Reset()
     {
+        Blast();
         _release(this);
     }
 }

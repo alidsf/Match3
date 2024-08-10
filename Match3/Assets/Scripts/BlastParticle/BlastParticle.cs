@@ -4,13 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BlastParticle : MonoBehaviour
+public class BlastParticle : PooledObject<BlastParticle>
 {
     [SerializeField] private GameObject[] particles;
-
-    public IObjectPool<BlastParticle> pool;
-
-    private Action<BlastParticle> _releaseAction;
 
     private void OnEnable() =>
         StartCoroutine(DisableIE());
@@ -18,11 +14,8 @@ public class BlastParticle : MonoBehaviour
     private IEnumerator DisableIE()
     {
         yield return new WaitForSeconds(0.8f);
-        _releaseAction(this);
+        _release(this);
     }
-
-    public void Init(Action<BlastParticle> releaseAction) =>
-        _releaseAction = releaseAction;
 
     public void SetParticle(int blastNumber, Vector3 position, Vector3 scale)
     {

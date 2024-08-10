@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridItem : MonoBehaviour
+public class GridItem : PooledObject<GridItem>
 {
+    [SerializeField] private GameObject itemObject;
     [SerializeField] private GameObject[] objects;
 
     private int _gridItemNumber;
@@ -16,7 +17,7 @@ public class GridItem : MonoBehaviour
     private bool _isMoving;
     public bool isMoving { get { return _isMoving; } }
 
-    public bool isEnable { get { return gameObject.activeSelf; } }
+    public bool isEnable { get { return itemObject.activeSelf; } }
 
     public void SetTarget(Vector2Int targetPosition) =>
             _targetPosition = targetPosition;
@@ -54,7 +55,7 @@ public class GridItem : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void SetNewPosition()
     {
         SetEnable(true);
         SetRandomGridItem();
@@ -63,7 +64,7 @@ public class GridItem : MonoBehaviour
 
     public void SetEnable(bool value)
     {
-        gameObject.SetActive(value);
+        itemObject.SetActive(value);
 
         if (!value)
             BlastParticleManager.Instance.Blast(_gridItemNumber,
@@ -75,5 +76,10 @@ public class GridItem : MonoBehaviour
         int height = targetPosition.y;
         Vector3 fallPosition = Vector2.up * height;
         transform.localPosition += fallPosition;
+    }
+
+    public void Reset()
+    {
+        _release(this);
     }
 }

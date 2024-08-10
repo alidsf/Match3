@@ -17,9 +17,17 @@ public class GridManager : MonoBehaviour
     private bool _allMovesDone;
     private bool _canCheckMatch3;
 
-    public void Init()
+    private int _numberOfMatches;
+    public int numberOfMatches { get { return _numberOfMatches; } }
+
+    private bool _isInitialized;
+
+    public void Init(int column, int row, float boardSize, Vector2 startPosition)
     {
-        _gridItems = gridCreator.GetArray(gridItemPrefab);
+        transform.position = startPosition;
+
+        gridCreator.Init(gridItemPrefab);
+        _gridItems = gridCreator.GetArray(column, row, boardSize);
 
         for (int x = 0; x < _gridItems.GetLength(0); x++)
         {
@@ -31,10 +39,15 @@ public class GridManager : MonoBehaviour
         }
 
         Match3Checker.SetWithoutMatch(ref _gridItems);
+
+        _isInitialized = true;
     }
 
     private void Update()
     {
+        if (!_isInitialized)
+            return;
+
         if (!Input.GetMouseButton(0))
             _mouseUp = true;
 
@@ -84,7 +97,8 @@ public class GridManager : MonoBehaviour
                 if (_gridItems[x, y].isEnable)
                     MoveDown(_gridItems[x, y]);
 
-        ResetGrideItems(matchList);
+        _numberOfMatches += matchList.Count;
+        SetNewPositionGrideItems(matchList);
     }
 
     private void MoveDown(GridItem currentGridItem)
@@ -103,10 +117,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void ResetGrideItems(List<GridItem> matchList)
+    private void SetNewPositionGrideItems(List<GridItem> matchList)
     {
         for (int i = 0; i < matchList.Count; i++)
-            matchList[i].Reset();
+            matchList[i].SetNewPosition();
 
         _canCheckMatch3 = true;
     }
@@ -130,7 +144,8 @@ public class GridManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!Input.GetMouseButton(0) || !_allMovesDone || !_mouseUp)
+        if (!Input.GetMouseButton(0) || !_allMovesDone ||
+            !_mouseUp || !_isInitialized)
             return;
 
         GridTouchManager.SelectGridItem(ref firstGridItem, ref secondGridItem, layerMask, NewMove);
@@ -140,5 +155,19 @@ public class GridManager : MonoBehaviour
     {
         ChangeGridItemPosition(firstGridItem, secondGridItem);
         _canCheckMatch3 = true;
+    }
+
+    public void Reset()
+    {
+        if (!_isInitialized)
+            return;
+
+        for (int x = _gridItems.GetLength(0) - 1; x >= 0; x--)
+            for (int y = 0; y < _gridItems.GetLength(1); y++)
+                if (_gridItems[x, y].isEnable)
+                    _gridItems[x, y].Reset();
+
+        _numberOfMatches = 0;
+        _isInitialized = false;
     }
 }
